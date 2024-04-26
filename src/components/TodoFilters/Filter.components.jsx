@@ -19,7 +19,7 @@ const FilterButton = ({ action, active, filter }) => {
     <button
       onClick={action}
       className={
-        ` hover:text-white cursor-pointer transition-all duration-300 ease-in-out ` +
+        ` hover:text-white cursor-pointer transition-all duration-300 ease-in-out text-sm ` +
         (active.toLowerCase().includes(filter.toLowerCase())
           ? "text-blue-400"
           : "text-gray-400")
