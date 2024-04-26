@@ -9,7 +9,7 @@ const Todo = ({ todo, handleSetCompleted, handleDelete }) => {
         {completed ? (
           <div
             onClick={() => handleSetCompleted(id)}
-            className="bg-green-700 p-1 rounded-full cursor-pointer"
+            className="bg-green-500 p-1 rounded-full cursor-pointer"
           >
             <img className="h-4 w-4 " src="/check-icon.svg" alt="Check Icon" />
           </div>

@@ -5,8 +5,14 @@ module.exports = {
     extend: {
       fontFamily: {
         anton: ['Anton', 'serif'],
+        
         inter: ['Inter', 'serif'],
+
+        cookie: ['Cookie', 'serif'],
+
+        merriweather: ['Merriweather', 'serif'],
       }
+      
     },
   },
   plugins: [],

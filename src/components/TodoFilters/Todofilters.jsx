@@ -21,25 +21,25 @@ const TodoFilters = ({
         <FilterButton
           action={() => showAllTodos()}
           active={activeFilter}
-          filter="All"
+          filter="Todas"
         />
         <FilterButton
           action={() => showActiveTodos()}
           active={activeFilter}
-          filter="Active"
+          filter="Pendientes"
         />
         <FilterButton
           action={() => showCompletedTodos()}
           active={activeFilter}
-          filter="Completed"
+          filter="Realizadas"
         />
       </FilterButtonContainer>
 
       <button
         onClick={() => handleClearComplete()}
-        className="text-gray-400 hover:text-white cursor-pointer transition-all duration-300 ease-in-out"
+        className="text-gray-400 hover:text-white cursor-pointer transition-all duration-300 ease-in-out text-md"
       >
-        Clear Completed
+        Quitar realizadas
       </button>
     </FiltersContainer>
   );
