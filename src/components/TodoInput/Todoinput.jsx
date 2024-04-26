@@ -17,7 +17,7 @@ const TodoInput = ({ addTodo }) => {
       </div>
       <input
         type="text"
-        className="focus:shadow-lg font-inter focus:shadow-blue-700 pl-12 w-full py-4 bg-gray-700 rounded-xl outline-none transition-all duration-300 ease-in-out"
+        className="focus:shadow-lg font-inter focus:shadow-sky-600 pl-12 w-full py-4 bg-gray-700 rounded-xl outline-none transition-all duration-300 ease-in-out"
         placeholder="no te olvides de..."
         value={title}
         onChange={(e) => setTitle(e.target.value)} // aca le asigno un nuevo valor al title cada evz que se actualiza el input con el evento
