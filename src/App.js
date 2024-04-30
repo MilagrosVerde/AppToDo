@@ -47,9 +47,11 @@ const addTodo = (title) => {
 const handleSetCompleted = (id) => {
   const updateList = todos.map((todo) => { // la updateList es la lista actualizada
     if (todo.id === id) {
+      
       return {
         ...todo,
         completed: !todo.completed,
+        
       };
     } 
 
@@ -60,6 +62,7 @@ const handleSetCompleted = (id) => {
   setTodos(updateList)
  
 };
+
 
 
 
@@ -111,7 +114,13 @@ useEffect(() => {
 } , [activeFilter, todos]);
 
 
-
+function allCompleted(todos) {
+  const todasCompletadas = todos.every(todo => todo.completed === true);
+  if (todasCompletadas) {
+    console.log('Has completado todas las tareas');
+    alert('Has completado todas las tareas');
+}
+}
   return (
     <div className="bg-gray-800 min-h-screen h-full font-inter text-gray-100 flex items-center justify-center py-20 px-5 ">
       <div className="container flex flex-col max-w-xl">
@@ -126,6 +135,7 @@ useEffect(() => {
         showAllTodos={showAllTodos}
         showCompletedTodos={showCompletedTodos}
         handleClearComplete={handleClearComplete}
+        allCompleted={allCompleted(todos)}
 
         />
 
