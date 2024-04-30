@@ -45,18 +45,23 @@ const addTodo = (title) => {
 //esta funcion es para q me muestre como completada la tarea
 // la funcion recorre la lista y si el id es igual al id de la tarea que se esta pasando, la tarea se marca como completada y se cambia el estado
 const handleSetCompleted = (id) => {
-  const updateList = todos.map((todo) => {
+  const updateList = todos.map((todo) => { // la updateList es la lista actualizada
     if (todo.id === id) {
       return {
         ...todo,
         completed: !todo.completed,
       };
     } 
+
+
       return todo;
     
   })
   setTodos(updateList)
-}
+ 
+};
+
+
 
 
 // esta es para borrar tareas
@@ -69,6 +74,7 @@ const handleDelete = (id) => {
 
 const [activeFilter, setActiveFilter] = useState('all'); // es para saber cual de los filtros esta activo
 const [filteresTodos, setFilteresTodos] = useState(todos); // es para filtrar las tareas
+
 
 
 const handleClearComplete = () => { // es para borrar las tareas completadas
@@ -120,6 +126,7 @@ useEffect(() => {
         showAllTodos={showAllTodos}
         showCompletedTodos={showCompletedTodos}
         handleClearComplete={handleClearComplete}
+
         />
 
       </div>
