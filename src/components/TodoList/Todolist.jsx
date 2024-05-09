@@ -10,6 +10,7 @@ const TodoList = ({
   showAllTodos,
   showCompletedTodos,
   handleClearComplete,
+  handleEdit,
 }) => {
   return (
     <div className="flex flex-col mt-7 rounded-lg overflow-hidden shadow-2xl">
@@ -19,6 +20,7 @@ const TodoList = ({
           todo={todo}
           handleSetCompleted={handleSetCompleted}
           handleDelete={handleDelete}
+          setTodo={handleEdit}
         />
       ))}
       <TodoFilters

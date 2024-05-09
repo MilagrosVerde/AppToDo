@@ -2,6 +2,7 @@ import { Tittle } from "./components/Tittle/Tittle";
 import { TodoInput } from "./components/TodoInput/Todoinput";
 import { TodoList } from "./components/TodoList/Todolist";
 import { useEffect, useState } from "react";
+import {BrowserRouter, Routes, Route} from "react-router-dom"
 
 function App() {
 
@@ -34,6 +35,7 @@ const addTodo = (title) => {
    id: lastId + 1,
    title: title,
    completed: false,
+   description: "",
  }
 
   const todoList = [...todos]
@@ -63,6 +65,13 @@ const handleSetCompleted = (id) => {
  
 };
 
+const handleEdit = (value) => {
+  const index = todos.findIndex(todo => todo.id === value.id)
+  let newTodos = todos
+  newTodos[index] = value
+  setTodos(newTodos)
+ 
+};
 
 
 
@@ -136,6 +145,7 @@ function allCompleted(todos) {
         showCompletedTodos={showCompletedTodos}
         handleClearComplete={handleClearComplete}
         allCompleted={allCompleted(todos)}
+        handleEdit={handleEdit}
 
         />
 
