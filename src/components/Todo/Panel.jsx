@@ -17,10 +17,10 @@ export const Panel = ({ open, setOpen, todo, setTodo }) => {
       )}
       <div
         className={`bg-slate-800 transition-all duration-300  fixed z-50 top-0 right-0  h-full overflow-hidden    ${
-          open ? "w-full md:w-80" : "w-0"
+          open ? "w-full md:w-80" : "w-0 "
         }`}
       >
-        <div className="w-full h-full flex flex-col">
+        <div className="w-full h-full flex flex-col  bg-gray-700 rounded-xl ">
           {/**bloque de edicion  */}
           <div className="p-4 flex-1 w-full">
             <p className="text-xl font-medium  mb-10 truncate ">
@@ -29,9 +29,9 @@ export const Panel = ({ open, setOpen, todo, setTodo }) => {
             </p>
 
             <textarea
-              rows={8}
+              rows={10}
               placeholder="Notas..."
-              className="bg-slate-700 w-full p-4 "
+              className="bg-slate-600 w-full p-4 rounded-md focus:shadow-lg  focus:shadow-sky-600 outline-none transition-all duration-300 ease-in-out "
               value={localToDo.description}
               onChange={(e) =>
                 setLocalToDo({ ...localToDo, description: e.target.value })
@@ -39,16 +39,16 @@ export const Panel = ({ open, setOpen, todo, setTodo }) => {
             ></textarea>
           </div>
           {/**bloque de acciones  */}
-          <div className="flex items-center space-x-2 h-16 w-full px-4">
+          <div className="flex items-center space-x-2 h-16 w-full px-4  justify-between">
             <button
-              className="bg-blue-400 rounded-full h-12 px-5 "
+              className="bg-sky-700 rounded-full h-12 px-5  "
               onClick={handleSave}
             >
               Guardar
             </button>
             <button
               onClick={() => setOpen(false)}
-              className="bg-gray-700 rounded-full h-12 px-5 "
+              className="bg-gray-600 rounded-full h-12 px-5 "
             >
               Cerrar
             </button>
