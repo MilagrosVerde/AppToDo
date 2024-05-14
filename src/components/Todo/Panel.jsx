@@ -28,10 +28,20 @@ export const Panel = ({ open, setOpen, todo, setTodo }) => {
               {localToDo.title}{" "}
             </p>
 
+            <input
+              type="date"
+              className="bg-slate-600 w-full p-4 rounded-md focus:shadow-2xl  focus:shadow-sky-600 outline-none transition-all duration-300 ease-in-out mb-6"
+              value={localToDo.date}
+              defaultValue={localToDo.date}
+              onChange={(e) => {
+                setLocalToDo({ ...localToDo, date: e.target.value });
+                console.log(e.target.value);
+              }}
+            ></input>
             <textarea
               rows={10}
               placeholder="Notas..."
-              className="bg-slate-600 w-full p-4 rounded-md focus:shadow-lg  focus:shadow-sky-600 outline-none transition-all duration-300 ease-in-out "
+              className="bg-slate-600 w-full p-4 rounded-md focus:shadow-2xl  focus:shadow-sky-600 outline-none transition-all duration-300 ease-in-out  "
               value={localToDo.description}
               onChange={(e) =>
                 setLocalToDo({ ...localToDo, description: e.target.value })
@@ -41,7 +51,7 @@ export const Panel = ({ open, setOpen, todo, setTodo }) => {
           {/**bloque de acciones  */}
           <div className="flex items-center space-x-2 h-16 w-full px-4  justify-between">
             <button
-              className="bg-sky-700 rounded-full h-12 px-5  "
+              className="bg-sky-600 rounded-full h-12 px-5  "
               onClick={handleSave}
             >
               Guardar

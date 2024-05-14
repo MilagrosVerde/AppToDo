@@ -2,7 +2,10 @@ import { Tittle } from "./components/Tittle/Tittle";
 import { TodoInput } from "./components/TodoInput/Todoinput";
 import { TodoList } from "./components/TodoList/Todolist";
 import { useEffect, useState } from "react";
-import {BrowserRouter, Routes, Route} from "react-router-dom"
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { format } from "date-fns";
+//import FilterComponent from "./components/Filter/Filter";
 
 function App() {
 
@@ -11,22 +14,10 @@ function App() {
       id: 1,
       title: 'Ir al supermercado',
       completed: false,
+      description: "",
+      date:  format(new Date(), "yyyy-MM-dd")
     },
-    {
-      id: 2,
-      title: 'Hacer actividad fisica',
-     completed: false,
-    },
-    {
-      id: 3,
-      title: 'Pasear al perro',
-      completed: false,
-    },
-    {
-      id: 4,
-      title: 'Estudiar por 4 horas',
-      completed: false,
-    }
+
   ]);
 
 const addTodo = (title) => {
@@ -36,13 +27,34 @@ const addTodo = (title) => {
    title: title,
    completed: false,
    description: "",
+   date: format(new Date(), "yyyy-MM-dd")
+   
  }
+ console.log(newTodo)
 
   const todoList = [...todos]
  todoList.push(newTodo);
  setTodos(todoList)
  ;
 }
+
+
+// crear estado q sea filter que tenga dos campos, el primero es si esta actuvado o no y el segundo es la fecha, necesito fiultrar  las tareas
+//para que al seleccionar la fecha me de las tareas que en date tenga la fecha que le estoy mandando 
+
+
+const [filter, setFilter] = useState({
+  status: 'all',
+  date: {
+    active: false,
+    value: format(new Date(), "yyyy-MM-dd")
+  },
+  
+})
+
+
+
+
 
 //esta funcion es para q me muestre como completada la tarea
 // la funcion recorre la lista y si el id es igual al id de la tarea que se esta pasando, la tarea se marca como completada y se cambia el estado
@@ -84,8 +96,8 @@ const handleDelete = (id) => {
 } 
 
 
-const [activeFilter, setActiveFilter] = useState('all'); // es para saber cual de los filtros esta activo
 const [filteresTodos, setFilteresTodos] = useState(todos); // es para filtrar las tareas
+
 
 
 
@@ -96,31 +108,51 @@ const handleClearComplete = () => { // es para borrar las tareas completadas
 
 
 const showAllTodos = () => { // es para mostrar todas las tareas
-  setActiveFilter('all');
+  setFilter({
+    ...filter,
+    status: 'all',
+    
+  });
 } 
 
 
 const showActiveTodos = () => { // es para mostrar las tareas activas
-   setActiveFilter('active')
+  setFilter({
+    ...filter,
+    status: 'active',
+    
+  })
 }
 
 const showCompletedTodos = () => { // es para mostrar las tareas completadas
-  setActiveFilter('completed')
+  setFilter({
+    ...filter,
+    status: 'completed',
+    
+  })
 }
 
 
 
 useEffect(() => {
-  if (activeFilter === 'all') {
-    setFilteresTodos(todos);
-  } else if (activeFilter === 'active') {
-    const activeTodos = todos.filter(todo => todo.completed === false)
-    setFilteresTodos(activeTodos);
-  } else if (activeFilter === 'completed') {
-    const completedTodos = todos.filter(todo => todo.completed === true)
-    setFilteresTodos(completedTodos);
+
+  let filteredList = []
+ if (filter.status === 'all') {
+  filteredList = todos
+ }
+ else if (filter.status === 'active') {
+    filteredList = todos.filter(todo => todo.completed === false)
+  } else if (filter.status === 'completed') {
+    filteredList = todos.filter(todo => todo.completed === true)
   }
-} , [activeFilter, todos]);
+
+  if (filter.date.active ) {
+    filteredList = filteredList.filter(item => item.date === filter.date.value)
+  }
+  setFilteresTodos(filteredList)
+} , [filter, todos]);
+
+
 
 
 function allCompleted(todos) {
@@ -131,13 +163,15 @@ function allCompleted(todos) {
 }
 }
   return (
+
     <div className="bg-gray-800 min-h-screen h-full font-inter text-gray-100 flex items-center justify-center py-20 px-5 ">
       <div className="container flex flex-col max-w-xl">
-        <Tittle></Tittle>
+        <Tittle filter={filter} setFilter={setFilter}></Tittle>
+        
         <TodoInput addTodo={addTodo}></TodoInput>
         <TodoList 
         todos={filteresTodos} 
-        activeFilter={activeFilter}
+        activeFilter={filter.status}
         handleSetCompleted={handleSetCompleted} 
         handleDelete={handleDelete}
         showActiveTodos={showActiveTodos}
@@ -151,6 +185,7 @@ function allCompleted(todos) {
 
       </div>
     </div>
+
   );
 }
 

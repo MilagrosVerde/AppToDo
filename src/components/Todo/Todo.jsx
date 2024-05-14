@@ -19,7 +19,7 @@ const Todo = ({ todo, handleSetCompleted, handleDelete, setTodo }) => {
           {completed ? (
             <div
               onClick={() => handleSetCompleted(id)}
-              className="bg-green-500 p-1 rounded-full cursor-pointer"
+              className="bg-green-400 p-1 rounded-full cursor-pointer"
             >
               <img
                 className="h-4 w-4 "
